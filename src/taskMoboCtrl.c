@@ -852,7 +852,7 @@ static void vtaskMoboCtrl( void * pcParameters )
 			if(i2c.pcfmobo)				// Make sure the Mobo PCF is present
    	    	{
 				pcf8574_mobo_clear(cdata.PCF_I2C_Mobo_addr, Mobo_PCF_TX);
-				if(i2c.pcflpf1)			// If the PCF for Low Pass switching is
+				// if(i2c.pcflpf1)			// comment out, use Widget PTT_1 always
 				{						// also present, then we can use Widget PTT_1
 										// for additional PTT control
 					gpio_set_gpio_pin(PTT_1);
