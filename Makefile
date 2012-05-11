@@ -47,6 +47,9 @@ sdr-widget::
 widget-control: widget-control.c src/features.h
 	gcc $(AUDIO_WIDGET_DEFAULTS) -o widget-control widget-control.c -lusb-1.0
 
+program:
+	cd Release && make program
+
 clean::
 	rm -f widget-control widget-control.exe
 	cd Release && make clean

@@ -20,6 +20,7 @@ for d in \
     "/cygdrive/c/Program Files/Atmel/AVR Tools/AVR32 Studio/plugins/com.atmel.avr.toolchains.win32.x86_3.1.0.201012011657/os/win32/x86/bin" \
     "/usr/local/eclipse/plugins/com.atmel.avr.toolchains.linux.x86_64_3.1.0.201012011657/os/linux/x86_64/bin" \
     "/opt/avr32-gnu-toolchain-linux_x86_64/bin" \
+    "~/avr32-tools-990c274/bin/" \
     ;do
 	if [ -d "$d" ]
 	then

@@ -7,4 +7,5 @@
 *.o
 *.d
 *.elf
+*.hex
 widget-control
