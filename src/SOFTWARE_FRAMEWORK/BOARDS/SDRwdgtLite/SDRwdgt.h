@@ -46,7 +46,7 @@
 
 // Osc1 crystal is not mounted by default. Set the following definitions to the
 // appropriate values if a custom Osc1 crystal is mounted on your board.
-#define FOSC1           12288000                              //!< Osc1 frequency: Hz.
+#define FOSC1           24576000  // 12288000                              //!< Osc1 frequency: Hz.
 #define OSC1_STARTUP    AVR32_PM_OSCCTRL1_STARTUP_2048_RCOSC  //!< Osc1 startup time: RCOsc periods.
 
 //! @}
@@ -86,10 +86,10 @@
 /*! \name GPIO Connections of LEDs
  */
 //! @{
-#define LED0_GPIO   AVR32_PIN_PX20
-#define LED1_GPIO   AVR32_PIN_PX46
-#define LED2_GPIO   AVR32_PIN_PX50
-#define LED3_GPIO   AVR32_PIN_PX57
+#define LED0_GPIO   AVR32_PIN_PX39
+#define LED1_GPIO   AVR32_PIN_PX43
+#define LED2_GPIO   AVR32_PIN_PX47
+#define LED3_GPIO   AVR32_PIN_PX51
 //! @}
 
 /*! \name PWM Channels of LEDs
@@ -133,18 +133,18 @@
 /*! \name AK5493 24 bit hi-performance ADC
  */
 //! @{
-#define AK5394_DFS0                      AVR32_PIN_PB00		// pulled up sampling speed sense (or control)
-#define AK5394_DFS1                      AVR32_PIN_PB01		// pulled up sampling speed sense (or control)
-#define AK5394_RSTN                      AVR32_PIN_PB03		// pulled up reset sense (or control)
+#define AK5394_DFS0                      AVR32_PIN_PX12		// pulled up sampling speed sense (or control)
+#define AK5394_DFS1                      AVR32_PIN_PX13		// pulled up sampling speed sense (or control)
+#define AK5394_RSTN                      AVR32_PIN_PX00		// pulled up reset sense (or control)
 #define AK5394_HPFE                      AVR32_PIN_PB04		// pulled up High Pass Filter sense (or control)
 #define AK5394_ZCAL                      AVR32_PIN_PB05		// Zero Calibration Control to A/D
 #define AK5394_CAL                       AVR32_PIN_PB06		// Calibration Active from A/D
-#define AK5394_SMODE1                    AVR32_PIN_PB07		// pulled up mode sense (or control)
-#define AK5394_SMODE2                    AVR32_PIN_PB08		// pulled up mode sense (or control)
+#define AK5394_SMODE1                    AVR32_PIN_PX12		// pulled up mode sense (or control)
+#define AK5394_SMODE2                    AVR32_PIN_PX13		// pulled up mode sense (or control)
 
 // NOTE:: need to work on these pin assignments
 #define AK5394_FSYNC                     AVR32_PIN_PX26		// with Jumper 1-2 in J302
-#define AK5394_LRCK                      AVR32_PIN_PX36		// with Jumper 3-4 in J302
+#define AK5394_LRCK                      AVR32_PIN_PX26		// with Jumper 3-4 in J302
 #define AK5394_LRCK_IN                   AVR32_PIN_PX26		// with Jumper 2-3 in J302
 #define AK5394_SDATA                     AVR32_PIN_PX25
 #define AK5394_SCLK                      AVR32_PIN_PX28		// trace on board to PX34  ??

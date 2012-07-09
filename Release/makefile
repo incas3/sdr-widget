@@ -43,21 +43,81 @@ endif
 endif
 
 -include ../makefile.defs
+OBJCOPY = avr32-objcopy
+# Output format. (can be srec, ihex, binary)
+FORMAT = ihex
+SIZE = avr32-size
+TARGET = widget
+
+HEXSIZE = $(SIZE) --target=$(FORMAT) $(TARGET).hex
+ELFSIZE = $(SIZE) $(MCU_FLAG) $(FORMAT_FLAG) $(TARGET).elf
+
+TARGET_MCU = at32uc3a3256
+PROGRAMMER = ../../dfu-programmer-0.5.4/src/dfu-programmer
+
+# Define Messages
+# English
+MSG_ERRORS_NONE = Errors: none
+MSG_BEGIN = -------- begin --------
+MSG_END = --------  end  --------
+MSG_SIZE_BEFORE = Size before: 
+MSG_SIZE_AFTER = Size after:
+MSG_COFF = Converting to AVR COFF:
+MSG_EXTENDED_COFF = Converting to AVR Extended COFF:
+MSG_FLASH = Creating load file for Flash:
+MSG_EEPROM = Creating load file for EEPROM:
+MSG_EXTENDED_LISTING = Creating Extended Listing:
+MSG_SYMBOL_TABLE = Creating Symbol Table:
+MSG_LINKING = Linking:
+MSG_COMPILING = Compiling C:
+MSG_COMPILING_CPP = Compiling C++:
+MSG_ASSEMBLING = Assembling:
+MSG_CLEANING = Cleaning project:
+MSG_CREATING_LIBRARY = Creating library:
 
 # Add inputs and outputs from these tool invocations to the build variables 
+all: build
 
-# All Target
-all: widget.elf
+build: elf hex sizebefore sizeafter
+
+elf: $(TARGET).elf
+hex: $(TARGET).hex
+eep: $(TARGET).eep
+lss: $(TARGET).lss
+sym: $(TARGET).sym
+
+sizebefore:
+	@if test -f $(TARGET).elf; then echo; echo $(MSG_SIZE_AFTER); $(ELFSIZE); \
+	2>/dev/null; echo; fi
+
+sizeafter:
+	@if test -f $(TARGET).elf; then echo; echo $(MSG_SIZE_AFTER); $(HEXSIZE); \
+	2>/dev/null; echo; fi
+
+# Create final output files (.hex, .eep) from ELF output file.
+%.hex: %.elf
+	@echo
+	@echo $(MSG_FLASH) $@
+	$(OBJCOPY) -O $(FORMAT) $< $@
 
 # Tool invocations
 widget.elf: $(OBJS) $(USER_OBJS)
 	@echo Link $@
-	@avr32-gcc -nostartfiles -Wl,--gc-sections -Wl,-e,_trampoline -mpart=uc3a3256 -Wl,--gc-sections --rodata-writable -Wl,--direct-data -o"widget.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	@avr32-gcc -nostartfiles -Wl,--gc-sections -Wl,-e,_trampoline -mpart=uc3a3256 -Wl,--gc-sections --rodata-writable -Wl,--direct-data -o"$(TARGET).elf" $(OBJS) $(USER_OBJS) $(LIBS)
+
 # Other Targets
+
+program: hex
+	$(PROGRAMMER) $(TARGET_MCU) erase
+	$(PROGRAMMER) $(TARGET_MCU) flash  --suppress-bootloader-mem $(TARGET).hex --debug 6
+	$(PROGRAMMER) $(TARGET_MCU) reset
+
 clean:
-	-$(RM) $(OBJS)$(C_DEPS)$(EXECUTABLES) widget.elf
+	-$(RM) $(OBJS)$(C_DEPS)$(EXECUTABLES) widget.elf widget.hex
 
 .PHONY: all clean dependents
 .SECONDARY:
 
 -include ../makefile.targets
+
+

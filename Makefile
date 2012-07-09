@@ -21,6 +21,9 @@ sdr-widget::
 widget-control: widget-control.c src/features.h
 	gcc -o widget-control widget-control.c -lusb-1.0
 
+program:
+	cd Release && make program
+
 clean::
 	cd Release && make clean
 	rm -f widget-control

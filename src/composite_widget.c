@@ -217,7 +217,8 @@ int i;
 	gpio_set_gpio_pin(AVR32_PIN_PX51);	// Enables power to XO and DAC in USBI2C AB-1 board
 	gpio_clr_gpio_pin(AVR32_PIN_PX52);
 
-
+	// Initialize usart comm
+	init_dbg_rs232(pm_freq_param.pba_f);
 
 	// Initialize Real Time Counter
 	rtc_init(&AVR32_RTC, RTC_OSC_RC, 0);	// RC clock at 115kHz
@@ -241,22 +242,32 @@ int i;
 //	}
 
 	if (FEATURE_ADC_AK5394A){
-		int counter;
+		//int counter;
 		// Set up AK5394A
-		gpio_clr_gpio_pin(AK5394_RSTN);		// put AK5394A in reset
-		gpio_clr_gpio_pin(AK5394_DFS0);		// L H -> 96khz   L L  -> 48khz
+		gpio_set_gpio_pin(AVR32_PIN_PX29); // ADC master_mode
+		gpio_set_gpio_pin(AVR32_PIN_PX08);  // MDIV
+		gpio_clr_gpio_pin(AVR32_PIN_PX11);  // i2s left justify 
+
+		//gpio_clr_gpio_pin(AK5394_RSTN);		// put AK5394A in reset
+		gpio_set_gpio_pin(AK5394_DFS0);		// L H -> 96khz   L L  -> 48khz
 		gpio_clr_gpio_pin(AK5394_DFS1);
-		gpio_set_gpio_pin(AK5394_HPFE);		// enable HP filter
-		gpio_clr_gpio_pin(AK5394_ZCAL);		// use VCOML and VCOMR to cal
-		gpio_set_gpio_pin(AK5394_SMODE1);	// SMODE1 = H for Master i2s
-		gpio_set_gpio_pin(AK5394_SMODE2);	// SMODE2 = H for Master/Slave i2s
+		//gpio_set_gpio_pin(AK5394_HPFE);		// enable HP filter
+		//gpio_clr_gpio_pin(AK5394_ZCAL);		// use VCOML and VCOMR to cal
+		//gpio_set_gpio_pin(AK5394_SMODE1);	// SMODE1 = H for Master i2s
+		//gpio_clr_gpio_pin(AK5394_SMODE2);	// SMODE2 = H for Master/Slave i2s
+		gpio_set_gpio_pin(AVR32_PIN_PX31);  // PCM enable
+		gpio_clr_gpio_pin(AVR32_PIN_PX30);  // Multibit disable
+		gpio_clr_gpio_pin(AVR32_PIN_PX33); // DSD disable
+
+		gpio_set_gpio_pin(AVR32_PIN_PX56); // test sig 1
+		gpio_set_gpio_pin(AVR32_PIN_PX57); // test sig 2
 
 		gpio_set_gpio_pin(AK5394_RSTN);		// start AK5394A
-		counter = 0;
-		while (gpio_get_pin_value(AK5394_CAL) && (counter < COUNTER_TIME_OUT)) counter++;
+		//counter = 0;
+		//while (gpio_get_pin_value(AK5394_CAL) && (counter < COUNTER_TIME_OUT)) counter++;
 		// wait till CAL goes low or time out
 		// if time out then change feature adc to none
-		if (counter >= COUNTER_TIME_OUT) features[feature_adc_index] = feature_adc_none;
+		//if (counter >= COUNTER_TIME_OUT) features[feature_adc_index] = feature_adc_none;
 	}
 
 	gpio_enable_pin_pull_up(GPIO_PTT_INPUT);
@@ -264,23 +275,22 @@ int i;
 	// Initialize interrupt controller
 	INTC_init_interrupts();
 
-	// Initialize usart comm
-	init_dbg_rs232(pm_freq_param.pba_f);
-
+	
 	// Initialize USB clock (on PLL1)
 	pm_configure_usb_clock();
-
+	print_dbg("Image boot\n");
 	// boot the image
 	image_boot();
-
+	print_dbg("Image init\n");
 	// initialize the image
 	image_init();
-
+	print_dbg("Task init\n");
 	// Start the image tasks
 	image_task_init();
-
+	print_dbg("Scheduler\n");
 	// Start OS scheduler
 	vTaskStartScheduler();
+	print_dbg("Sadly it died\n");
 	portDBG_TRACE("FreeRTOS returned.");
 	return 42;
 }
