@@ -53,7 +53,7 @@ $ git status
     #	modified:   .cproject
     #	modified:   .project
     #	modified:   src/DG8SAQ_cmd.c
-    #	modified:   src/SOFTWARE_FRAMEWORK/BOARDS/SDRwdgtLite/SDR-Widget.h
+    #	modified:   src/SOFTWARE_FRAMEWORK/BOARDS/Soundboard/SDR-Widget.h
     #	modified:   src/freq_and_filters.c
     #	modified:   src/taskMoboCtrl.c
     #	modified:   src/taskPowerDisplay.c
@@ -96,7 +96,7 @@ $ git checkout -b sdr-widget-2-loftur
 # And drop Loftur's changes into that branch:
 
 $ git checkout uac1-loftur src/DG8SAQ_cmd.c
-$ git checkout uac1-loftur src/SOFTWARE_FRAMEWORK/BOARDS/SDRwdgtLite/SDR-Widget.h
+$ git checkout uac1-loftur src/SOFTWARE_FRAMEWORK/BOARDS/Soundboard/SDR-Widget.h
 $ git checkout uac1-loftur src/freq_and_filters.c
 $ git checkout uac1-loftur src/taskMoboCtrl.c
 $ git checkout uac1-loftur src/taskPowerDisplay.c

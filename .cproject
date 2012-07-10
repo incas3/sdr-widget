@@ -38,7 +38,7 @@
 <option id="avr32.c.compiler.option.mcu.662037547" name="Microcontroller Unit" superClass="avr32.c.compiler.option.mcu" value="-mpart=uc3a3256" valueType="string"/>
 <option id="gnu.c.compiler.option.optimization.flags.1950111562" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" value="-fdata-sections" valueType="string"/>
 <option id="gnu.c.compiler.option.preprocessor.def.symbols.630148765" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-<listOptionValue builtIn="false" value="BOARD=SDRwdgtLite"/>
+<listOptionValue builtIn="false" value="BOARD=Soundboard"/>
 <listOptionValue builtIn="false" value="FREERTOS_USED"/>
 </option>
 <option id="gnu.c.compiler.option.include.paths.479058624" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
@@ -681,7 +681,7 @@
 <option id="avr32.c.compiler.option.mcu.175795228" name="Microcontroller Unit" superClass="avr32.c.compiler.option.mcu" value="-mpart=uc3a3256" valueType="string"/>
 <option id="gnu.c.compiler.option.optimization.flags.2040413959" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" value="-fdata-sections" valueType="string"/>
 <option id="gnu.c.compiler.option.preprocessor.def.symbols.1914135374" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
-<listOptionValue builtIn="false" value="BOARD=SDRwdgtLite"/>
+<listOptionValue builtIn="false" value="BOARD=Soundboard"/>
 <listOptionValue builtIn="false" value="FREERTOS_USED"/>
 </option>
 <option id="gnu.c.compiler.option.include.paths.914969582" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">

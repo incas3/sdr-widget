@@ -32,7 +32,7 @@ RM := rm -rf
 -include src/SOFTWARE_FRAMEWORK/DRIVERS/GPIO/subdir.mk
 -include src/SOFTWARE_FRAMEWORK/DRIVERS/FLASHC/subdir.mk
 -include src/SOFTWARE_FRAMEWORK/DRIVERS/EIC/subdir.mk
--include src/SOFTWARE_FRAMEWORK/BOARDS/SDRwdgtLite/subdir.mk
+-include src/SOFTWARE_FRAMEWORK/BOARDS/Soundboard/subdir.mk
 -include src/SOFTWARE_FRAMEWORK/ASM/subdir.mk
 -include objects.mk
 

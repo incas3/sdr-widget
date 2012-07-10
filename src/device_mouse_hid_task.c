@@ -51,7 +51,7 @@
 //_____  I N C L U D E S ___________________________________________________
 
 #include "conf_usb.h"
-#if BOARD != EVK1104 && BOARD != SDRwdgtLite
+#if BOARD != EVK1104 && BOARD != Soundboard
 #include "joystick.h"
 #endif
 #if BOARD == EVK1101

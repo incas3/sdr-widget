@@ -27,7 +27,7 @@
 
 #if BOARD == EVK1104
   #define GPIO_PIN_EXAMPLE_3  GPIO_PUSH_BUTTON_SW2
-#elif BOARD == SDRwdgt || BOARD == SDRwdgtLite
+#elif BOARD == SDRwdgt || BOARD == Soundboard
   #define GPIO_PIN_EXAMPLE_3  GPIO_PUSH_BUTTON_SW2
 #endif
 
