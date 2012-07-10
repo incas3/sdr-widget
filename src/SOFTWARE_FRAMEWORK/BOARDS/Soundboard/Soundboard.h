@@ -258,6 +258,6 @@
 //! @}
 
 // Inhale list of required modules
-#include "SDR-Widget.h"
+#include "Soundboard-Features.h"
 
 #endif  // _SDRwdgt_H_

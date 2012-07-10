@@ -68,7 +68,7 @@
 #include <avr32/io.h>
 #include "preprocessor.h"
 #include "compiler.h"
-#include "SDRwdgt.h"
+#include "Soundboard.h"
 #include "led.h"
 
 

@@ -100,10 +100,10 @@
   #include "UC3L_EK/uc3l_ek.h"
 #elif BOARD == Soundboard
     // User-reserved area: #include the header file of your board here (if any).
-  #include "Soundboard/SDRwdgt.h"
+  #include "Soundboard/Soundboard.h"
 #elif BOARD == SDRwdgt
     // User-reserved area: #include the header file of your board here (if any).
-  #include "SDRwdgt/SDRwdgt.h"
+  #include "SDRwdgt/Soundboard.h"
 #else
   #error No known AVR32 board defined
 #endif
