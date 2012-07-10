@@ -89,7 +89,7 @@ void uac2_AK5394A_task(void *pvParameters) {
 	while (TRUE) {
 		// All the hardwork is done by the pdca and the interrupt handler.
 		// Just check whether sampling freq is changed, to do rate change etc.
-
+		
 		vTaskDelayUntil(&xLastWakeTime, UAC2_configTSK_AK5394A_PERIOD);
 		//print_dbg(".\n");
 		if (freq_changed) {

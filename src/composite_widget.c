@@ -246,8 +246,9 @@ int i;
 		// Set up AK5394A
 		gpio_set_gpio_pin(AVR32_PIN_PX29); // ADC master_mode
 		gpio_set_gpio_pin(AVR32_PIN_PX08);  // MDIV
+		gpio_set_gpio_pin(AVR32_PIN_PX09);  // High pass filter
 		gpio_set_gpio_pin(AVR32_PIN_PX11);  // i2s left justify 
-		gpio_set_gpio_pin(AVR32_PIN_PX16);  //enable phantom power
+		gpio_clr_gpio_pin(AVR32_PIN_PX16);  //enable phantom power
 
 		//gpio_clr_gpio_pin(AK5394_RSTN);		// put AK5394A in reset
 		gpio_set_gpio_pin(AK5394_DFS0);		// L H -> 96khz   L L  -> 48khz
