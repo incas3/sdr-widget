@@ -86,7 +86,7 @@ typedef enum {
 	feature_out_swapped,
 	feature_end_out,
 	feature_adc_none,			// adc
-	feature_adc_ak5394a,
+	feature_adc_at1201,
 	feature_end_adc,
 	feature_dac_none,			// dac
 	feature_dac_cs4344,
@@ -127,7 +127,7 @@ typedef enum {
 		"swapped",														\
 		"end",															\
 		"none",															\
-		"ak5394a",														\
+		"at1201",														\
 		"end",															\
 		"none",															\
 		"cs4344",														\
@@ -184,7 +184,7 @@ extern const features_t features_default;
 #define FEATURE_OUT_SWAPPED				(features[feature_out_index] == (uint8_t)feature_out_swapped)
 
 #define FEATURE_ADC_NONE				(features[feature_adc_index] == (uint8_t)feature_adc_none)
-#define FEATURE_ADC_AK5394A				(features[feature_adc_index] == (uint8_t)feature_adc_ak5394a)
+#define FEATURE_ADC_AT1201				(features[feature_adc_index] == (uint8_t)feature_adc_at1201)
 
 #define FEATURE_DAC_NONE				(features[feature_dac_index] == (uint8_t)feature_dac_none)
 #define FEATURE_DAC_CS4344				(features[feature_dac_index] == (uint8_t)feature_dac_cs4344)
@@ -231,7 +231,7 @@ extern const features_t features_default;
 #endif
 #ifndef FEATURE_ADC_DEFAULT
 #if FEATURE_BOARD_DEFAULT == feature_board_widget
-#define FEATURE_ADC_DEFAULT				feature_adc_ak5394a
+#define FEATURE_ADC_DEFAULT				feature_adc_at1201
 #else
 #define FEATURE_ADC_DEFAULT				feature_adc_none
 #endif

@@ -35,8 +35,8 @@
 //#include "host_mouse_hid_task.h"
 #endif
 #include "composite_widget.h"
-#include "taskAK5394A.h"
-#include "uac2_taskAK5394A.h"
+#include "taskAT1201.h"
+#include "uac2_taskAT1201.h"
 //#include "I2C.h"
 
 /*
@@ -88,7 +88,7 @@ static void x_image_task_init(void) {
 #endif
 	//vStartTaskMoboCtrl();
 	// vStartTaskEXERCISE( tskIDLE_PRIORITY );
-	uac2_AK5394A_task_init();
+	uac2_AT1201_task_init();
 	uac2_device_audio_task_init(UAC2_EP_AUDIO_IN, UAC2_EP_AUDIO_OUT, UAC2_EP_AUDIO_OUT_FB);
 #endif
 #if LCD_DISPLAY						// Multi-line LCD display

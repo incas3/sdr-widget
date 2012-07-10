@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
 /*
- * uac1_taskAK5394A.c
+ * uac1_taskAT1201.c
  *
  *  Created on: Feb 14, 2010
  *  Refactored on: Feb 26, 2011
@@ -51,8 +51,8 @@
 #include "usb_specific_request.h"
 #include "device_audio_task.h"
 #include "uac1_device_audio_task.h"
-#include "taskAK5394A.h"
-#include "uac1_taskAK5394A.h"
+#include "taskAT1201.h"
+#include "uac1_taskAT1201.h"
 #include "Mobo_config.h"
 
 //_____ M A C R O S ________________________________________________________
@@ -61,26 +61,26 @@
 
 //_____ D E C L A R A T I O N S ____________________________________________
 
-void uac1_AK5394A_task(void*);
+void uac1_AT1201_task(void*);
 
 //!
 //! @brief This function initializes the hardware/software resources
 //! required for device CDC task.
 //!
-void uac1_AK5394A_task_init(void) {
-	AK5394A_task_init(TRUE);
-	xTaskCreate(uac1_AK5394A_task,
-				configTSK_AK5394A_NAME,
-				configTSK_AK5394A_STACK_SIZE,
+void uac1_AT1201_task_init(void) {
+	AT1201_task_init(TRUE);
+	xTaskCreate(uac1_AT1201_task,
+				configTSK_AT1201_NAME,
+				configTSK_AT1201_STACK_SIZE,
 				NULL,
-				UAC1_configTSK_AK5394A_PRIORITY,
+				UAC1_configTSK_AT1201_PRIORITY,
 				NULL);
 }
 
 //!
-//! @brief Entry point of the AK5394A task management
+//! @brief Entry point of the AT1201 task management
 //!
-void uac1_AK5394A_task(void *pvParameters) {
+void uac1_AT1201_task(void *pvParameters) {
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 
@@ -90,7 +90,7 @@ void uac1_AK5394A_task(void *pvParameters) {
 		// All the hardwork is done by the pdca and the interrupt handler.
 		// Just check whether alternate setting is changed, to do rate change etc.
 
-		vTaskDelayUntil(&xLastWakeTime, UAC1_configTSK_AK5394A_PERIOD);
+		vTaskDelayUntil(&xLastWakeTime, UAC1_configTSK_AT1201_PERIOD);
 
 		if (freq_changed) {
 			spk_mute = TRUE;
@@ -110,21 +110,21 @@ void uac1_AK5394A_task(void *pvParameters) {
 			pdca_disable_interrupt_reload_counter_zero(PDCA_CHANNEL_SSC_RX);
 			pdca_disable(PDCA_CHANNEL_SSC_RX);
 			// L L  -> 48khz   L H  -> 96khz
-			gpio_clr_gpio_pin(AK5394_DFS0);
-			gpio_clr_gpio_pin(AK5394_DFS1);
+			gpio_clr_gpio_pin(AT1201_DFS0);
+			gpio_clr_gpio_pin(AT1201_DFS1);
 
-			if (FEATURE_ADC_AK5394A) {
+			if (FEATURE_ADC_AT1201) {
 				// re-sync SSC to LRCK
 				// Wait for the next frame synchronization event
 				// to avoid channel inversion.  Start with left channel - FS goes low
-				while (!gpio_get_pin_value(AK5394_LRCK));
-				while (gpio_get_pin_value(AK5394_LRCK));
+				while (!gpio_get_pin_value(AT1201_LRCK));
+				while (gpio_get_pin_value(AT1201_LRCK));
 
 				// Enable now the transfer.
 				pdca_enable(PDCA_CHANNEL_SSC_RX);
 
 				// Init PDCA channel with the pdca_options.
-				AK5394A_pdca_enable();
+				AT1201_pdca_enable();
 			}
 			// reset usb_alternate_setting_changed flag
 			usb_alternate_setting_changed = FALSE;

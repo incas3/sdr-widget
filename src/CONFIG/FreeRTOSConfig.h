@@ -178,15 +178,15 @@ to exclude the API function. */
 #define UAC2_configTSK_USB_DAUDIO_PERIOD		1
 #define HPSDR_configTSK_USB_DAUDIO_PERIOD		2
 
-/* AK5394A task definitions. */
-#define configTSK_AK5394A_NAME					((const signed portCHAR *)"AK5394A")
-#define configTSK_AK5394A_STACK_SIZE			256
-#define UAC1_configTSK_AK5394A_PRIORITY			(tskIDLE_PRIORITY + 2)// Was 1
-#define UAC2_configTSK_AK5394A_PRIORITY			(tskIDLE_PRIORITY + 3)// Was +1, then +2
-#define HPSDR_configTSK_AK5394A_PRIORITY		(tskIDLE_PRIORITY + 2)
-#define UAC1_configTSK_AK5394A_PERIOD			200
-#define UAC2_configTSK_AK5394A_PERIOD			200
-#define HPSDR_configTSK_AK5394A_PERIOD			100
+/* AT1201 task definitions. */
+#define configTSK_AT1201_NAME					((const signed portCHAR *)"AT1201")
+#define configTSK_AT1201_STACK_SIZE			256
+#define UAC1_configTSK_AT1201_PRIORITY			(tskIDLE_PRIORITY + 2)// Was 1
+#define UAC2_configTSK_AT1201_PRIORITY			(tskIDLE_PRIORITY + 3)// Was +1, then +2
+#define HPSDR_configTSK_AT1201_PRIORITY		(tskIDLE_PRIORITY + 2)
+#define UAC1_configTSK_AT1201_PERIOD			200
+#define UAC2_configTSK_AT1201_PERIOD			200
+#define HPSDR_configTSK_AT1201_PERIOD			100
 
 /* USB host Audio HID task definitions. */
 #define configTSK_USB_HAUDIO_NAME             ((const signed portCHAR *)"USB Host Audio")

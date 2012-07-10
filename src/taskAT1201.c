@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
 /*
- * taskAK5394A.c
+ * taskAT1201.c
  *
  *  Created on: Feb 14, 2010
  *  Refactored on: Feb 26, 2011
@@ -48,7 +48,7 @@
 #include "usb_standard_request.h"
 #include "features.h"
 #include "device_audio_task.h"
-#include "taskAK5394A.h"
+#include "taskAT1201.h"
 
 //_____ M A C R O S ________________________________________________________
 
@@ -143,15 +143,15 @@ static void pdca_set_irq(void) {
 	Enable_global_interrupt();
 }
 
-void AK5394A_pdca_disable(void) {
+void AT1201_pdca_disable(void) {
 }
 
-void AK5394A_pdca_enable(void) {
+void AT1201_pdca_enable(void) {
 	pdca_init_channel(PDCA_CHANNEL_SSC_RX, &PDCA_OPTIONS); // init PDCA channel with options.
 	pdca_enable_interrupt_reload_counter_zero(PDCA_CHANNEL_SSC_RX);
 }
 
-void AK5394A_task_init(const Bool uac1) {
+void AT1201_task_init(const Bool uac1) {
 	// Set up CS4344
 	// Set up GLCK1 to provide master clock for CS4344
 	gpio_enable_module_pin(GCLK1, GCLK1_FUNCTION);	// for DA_SCLK
@@ -174,7 +174,7 @@ void AK5394A_task_init(const Bool uac1) {
 	pm_gc_enable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
 
 	pm_enable_osc1_ext_clock(&AVR32_PM);	// OSC1 is clocked by 12.288Mhz Osc
-	// from AK5394A Xtal Oscillator
+	// from AT1201 Xtal Oscillator
 	pm_enable_clk1(&AVR32_PM, OSC1_STARTUP);
 
 

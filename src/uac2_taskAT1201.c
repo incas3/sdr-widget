@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
 /*
- * uac2_taskAK5394A.c
+ * uac2_taskAT1201.c
  *
  *  Created on: Feb 14, 2010
  *  Refactored on: Feb 26, 2011
@@ -51,8 +51,8 @@
 #include "usb_specific_request.h"
 #include "device_audio_task.h"
 #include "uac2_device_audio_task.h"
-#include "taskAK5394A.h"
-#include "uac2_taskAK5394A.h"
+#include "taskAT1201.h"
+#include "uac2_taskAT1201.h"
 #include "Mobo_config.h"
 
 //_____ M A C R O S ________________________________________________________
@@ -61,27 +61,27 @@
 
 //_____ D E C L A R A T I O N S ____________________________________________
 
-void uac2_AK5394A_task(void*);
+void uac2_AT1201_task(void*);
 
 //!
 //! @brief This function initializes the hardware/software resources
 //! required for device CDC task.
 //!
-void uac2_AK5394A_task_init(void) {
+void uac2_AT1201_task_init(void) {
 	current_freq.frequency = 96000;
-	AK5394A_task_init(FALSE);
-	xTaskCreate(uac2_AK5394A_task,
-				configTSK_AK5394A_NAME,
-				configTSK_AK5394A_STACK_SIZE,
+	AT1201_task_init(FALSE);
+	xTaskCreate(uac2_AT1201_task,
+				configTSK_AT1201_NAME,
+				configTSK_AT1201_STACK_SIZE,
 				NULL,
-				UAC2_configTSK_AK5394A_PRIORITY,
+				UAC2_configTSK_AT1201_PRIORITY,
 				NULL);
 }
 
 //!
-//! @brief Entry point of the AK5394A task management
+//! @brief Entry point of the AT1201 task management
 //!
-void uac2_AK5394A_task(void *pvParameters) {
+void uac2_AT1201_task(void *pvParameters) {
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	int i;
@@ -89,8 +89,8 @@ void uac2_AK5394A_task(void *pvParameters) {
 	while (TRUE) {
 		// All the hardwork is done by the pdca and the interrupt handler.
 		// Just check whether sampling freq is changed, to do rate change etc.
-		
-		vTaskDelayUntil(&xLastWakeTime, UAC2_configTSK_AK5394A_PERIOD);
+
+		vTaskDelayUntil(&xLastWakeTime, UAC2_configTSK_AT1201_PERIOD);
 		//print_dbg(".\n");
 		if (freq_changed) {
 			print_dbg("Frequency changed to ");
@@ -106,9 +106,9 @@ void uac2_AK5394A_task(void *pvParameters) {
 				else if (FEATURE_BOARD_USBDAC)
 					gpio_set_gpio_pin(AVR32_PIN_PX51);
 
-				if ( FEATURE_ADC_AK5394A ) {
-					gpio_set_gpio_pin(AK5394_DFS0);		// L H  -> 96khz
-					gpio_clr_gpio_pin(AK5394_DFS1);
+				if ( FEATURE_ADC_AT1201 ) {
+					gpio_set_gpio_pin(AT1201_DFS0);		// L H  -> 96khz
+					gpio_clr_gpio_pin(AT1201_DFS1);
 				}
 
 				pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
@@ -132,9 +132,9 @@ void uac2_AK5394A_task(void *pvParameters) {
 				else if (FEATURE_BOARD_USBDAC)
 					gpio_clr_gpio_pin(AVR32_PIN_PX51);
 
-				if ( FEATURE_ADC_AK5394A ) {
-					gpio_set_gpio_pin(AK5394_DFS0);		// L H  -> 96khz
-					gpio_clr_gpio_pin(AK5394_DFS1);
+				if ( FEATURE_ADC_AT1201 ) {
+					gpio_set_gpio_pin(AT1201_DFS0);		// L H  -> 96khz
+					gpio_clr_gpio_pin(AT1201_DFS1);
 				}
 
 				pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
@@ -158,8 +158,8 @@ void uac2_AK5394A_task(void *pvParameters) {
 					else if (FEATURE_BOARD_USBDAC)
 						gpio_clr_gpio_pin(AVR32_PIN_PX51);
 
-	    			gpio_clr_gpio_pin(AK5394_DFS0);		// H L -> 192khz
-	    			gpio_set_gpio_pin(AK5394_DFS1);
+	    			gpio_clr_gpio_pin(AT1201_DFS0);		// H L -> 192khz
+	    			gpio_set_gpio_pin(AT1201_DFS1);
 
 	    			pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
 	    			pm_gc_setup(&AVR32_PM, AVR32_PM_GCLK_GCLK1, // gc
@@ -182,9 +182,9 @@ void uac2_AK5394A_task(void *pvParameters) {
 				else if (FEATURE_BOARD_USBDAC)
 					gpio_set_gpio_pin(AVR32_PIN_PX51);
 
-				if ( FEATURE_ADC_AK5394A ) {
-					gpio_clr_gpio_pin(AK5394_DFS0);		// H L -> 192khz
-					gpio_set_gpio_pin(AK5394_DFS1);
+				if ( FEATURE_ADC_AT1201 ) {
+					gpio_clr_gpio_pin(AT1201_DFS0);		// H L -> 192khz
+					gpio_set_gpio_pin(AT1201_DFS1);
 				}
 
 				pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
@@ -208,9 +208,9 @@ void uac2_AK5394A_task(void *pvParameters) {
 				else if (FEATURE_BOARD_USBDAC)
 					gpio_set_gpio_pin(AVR32_PIN_PX51);
 
-				if ( FEATURE_ADC_AK5394A ) {
-					gpio_clr_gpio_pin(AK5394_DFS0);		// L H  -> 96khz L L  -> 48khz
-					gpio_clr_gpio_pin(AK5394_DFS1);
+				if ( FEATURE_ADC_AT1201 ) {
+					gpio_clr_gpio_pin(AT1201_DFS0);		// L H  -> 96khz L L  -> 48khz
+					gpio_clr_gpio_pin(AT1201_DFS1);
 				}
 
 				pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
@@ -236,9 +236,9 @@ void uac2_AK5394A_task(void *pvParameters) {
 				else if (FEATURE_BOARD_USBDAC)
 					gpio_clr_gpio_pin(AVR32_PIN_PX51);
 
-				if ( FEATURE_ADC_AK5394A ) {
-					gpio_clr_gpio_pin(AK5394_DFS0);		// L H  -> 96khz L L  -> 48khz
-					gpio_clr_gpio_pin(AK5394_DFS1);
+				if ( FEATURE_ADC_AT1201 ) {
+					gpio_clr_gpio_pin(AT1201_DFS0);		// L H  -> 96khz L L  -> 48khz
+					gpio_clr_gpio_pin(AT1201_DFS1);
 				}
 
 				pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
@@ -253,24 +253,24 @@ void uac2_AK5394A_task(void *pvParameters) {
 
 			}
 
-			if (FEATURE_ADC_AK5394A) {
+			if (FEATURE_ADC_AT1201) {
 				// re-sync SSC to LRCK
 				// Wait for the next frame synchronization event
 				// to avoid channel inversion.  Start with left channel - FS goes low
 				// However, the channels are reversed at 192khz
 
 				if (current_freq.frequency == 192000) {
-					while (gpio_get_pin_value(AK5394_LRCK));
-					while (!gpio_get_pin_value(AK5394_LRCK));	// exit when FS goes high
+					while (gpio_get_pin_value(AT1201_LRCK));
+					while (!gpio_get_pin_value(AT1201_LRCK));	// exit when FS goes high
 				} else {
-					while (!gpio_get_pin_value(AK5394_LRCK));
-					while (gpio_get_pin_value(AK5394_LRCK));	// exit when FS goes low
+					while (!gpio_get_pin_value(AT1201_LRCK));
+					while (gpio_get_pin_value(AT1201_LRCK));	// exit when FS goes low
 				}
 				// Enable now the transfer.
 				pdca_enable(PDCA_CHANNEL_SSC_RX);
 
 				// Init PDCA channel with the pdca_options.
-				AK5394A_pdca_enable();
+				AT1201_pdca_enable();
 			}
 
 			spk_mute = FALSE;

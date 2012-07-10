@@ -133,22 +133,27 @@
 /*! \name AK5493 24 bit hi-performance ADC
  */
 //! @{
-#define AK5394_DFS0                      AVR32_PIN_PX12		// pulled up sampling speed sense (or control)
-#define AK5394_DFS1                      AVR32_PIN_PX13		// pulled up sampling speed sense (or control)
-#define AK5394_RSTN                      AVR32_PIN_PX00		// pulled up reset sense (or control)
-#define AK5394_HPFE                      AVR32_PIN_PB04		// pulled up High Pass Filter sense (or control)
-#define AK5394_ZCAL                      AVR32_PIN_PB05		// Zero Calibration Control to A/D
-#define AK5394_CAL                       AVR32_PIN_PB06		// Calibration Active from A/D
-#define AK5394_SMODE1                    AVR32_PIN_PX12		// pulled up mode sense (or control)
-#define AK5394_SMODE2                    AVR32_PIN_PX13		// pulled up mode sense (or control)
+#define AT1201_DFS0                      AVR32_PIN_PX12		// sampling speed control
+#define AT1201_DFS1                      AVR32_PIN_PX13		// sampling speed control
+#define AT1201_RSTN                      AVR32_PIN_PX00		// reset 
+#define AT1201_HPFE                      AVR32_PIN_PX09		// High Pass Filter
+
+#define AT1201_MASTER 					 AVR32_PIN_PX29		// ADC master_mode
+#define AT1201_MDIV						 AVR32_PIN_PX08		// MDIV
+#define AT1201_LJUST					 AVR32_PIN_PX11		// i2s left justify 
+#define AT1201_PHANTOM					 AVR32_PIN_PX16		//enable phantom power
+
+#define AT1201_PCM_ENABLE				 AVR32_PIN_PX31		// PCM enable
+#define AT1201_MULTIBIT_ENABLE			 AVR32_PIN_PX30		// Multibit disable
+#define AT1201_DSD_ENABLE				 AVR32_PIN_PX33		// DSD disable
+
+#define AT1201_TEST_SIG1				 AVR32_PIN_PX56		// test sig 1
+#define AT1201_TEST_SIG2				 AVR32_PIN_PX57		// test sig 2
 
 // NOTE:: need to work on these pin assignments
-#define AK5394_FSYNC                     AVR32_PIN_PX26		// with Jumper 1-2 in J302
-#define AK5394_LRCK                      AVR32_PIN_PX26		// with Jumper 3-4 in J302
-#define AK5394_LRCK_IN                   AVR32_PIN_PX26		// with Jumper 2-3 in J302
-#define AK5394_SDATA                     AVR32_PIN_PX25
-#define AK5394_SCLK                      AVR32_PIN_PX28		// trace on board to PX34  ??
-#define AK5394_AD_MCLK                   AVR32_PIN_PC04		// clock from A/D board
+#define AT1201_LRCK                      AVR32_PIN_PX26		// Left Right clock
+#define AT1201_SDATA                     AVR32_PIN_PX25
+#define AT1201_SCLK                      AVR32_PIN_PX28		// trace on board to PX34  ??
 
 //! @}
 

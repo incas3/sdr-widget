@@ -209,9 +209,9 @@ int i;
 	wdt_disable();
 
 	// The reason this is put as early as possible in the code
-	// is that AK5394A has to be put in reset when the clocks are not
+	// is that AT1201 has to be put in reset when the clocks are not
 	// fully set up.  Otherwise the chip will overheat
-	for (i=0; i< 1000; i++) gpio_clr_gpio_pin(AK5394_RSTN);	// put AK5394A in reset, and use this to delay the start up
+	for (i=0; i< 1000; i++) gpio_clr_gpio_pin(AT1201_RSTN);	// put AT1201 in reset, and use this to delay the start up
 															// time for various voltages (eg to the XO) to stablize
 
 	gpio_set_gpio_pin(AVR32_PIN_PX51);	// Enables power to XO and DAC in USBI2C AB-1 board
@@ -238,39 +238,30 @@ int i;
 
 
 //	if ( FEATURE_BOARD_WIDGET ) {
-//		gpio_clr_gpio_pin(AK5394_RSTN);	// put AK5394A in reset
+//		gpio_clr_gpio_pin(AT1201_RSTN);	// put AT1201 in reset
 //	}
 
-	if (FEATURE_ADC_AK5394A){
-		//int counter;
-		// Set up AK5394A
-		gpio_set_gpio_pin(AVR32_PIN_PX29); // ADC master_mode
-		gpio_set_gpio_pin(AVR32_PIN_PX08);  // MDIV
-		gpio_set_gpio_pin(AVR32_PIN_PX09);  // High pass filter
-		gpio_set_gpio_pin(AVR32_PIN_PX11);  // i2s left justify 
-		gpio_clr_gpio_pin(AVR32_PIN_PX16);  //enable phantom power
+	if (FEATURE_ADC_AT1201){
+		// Set up AT1201
+		gpio_set_gpio_pin(AT1201_MASTER); // ADC master_mode
+		gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
+		gpio_set_gpio_pin(AT1201_HPFE);  // High pass filter
+		gpio_set_gpio_pin(AT1201_LJUST);  // i2s left justify 
+		gpio_clr_gpio_pin(AT1201_PHANTOM);  //enable phantom power
 
-		//gpio_clr_gpio_pin(AK5394_RSTN);		// put AK5394A in reset
-		gpio_set_gpio_pin(AK5394_DFS0);		// L H -> 96khz   L L  -> 48khz
-		gpio_clr_gpio_pin(AK5394_DFS1);
-		//gpio_set_gpio_pin(AK5394_HPFE);		// enable HP filter
-		//gpio_clr_gpio_pin(AK5394_ZCAL);		// use VCOML and VCOMR to cal
-		//gpio_set_gpio_pin(AK5394_SMODE1);	// SMODE1 = H for Master i2s
-		//gpio_clr_gpio_pin(AK5394_SMODE2);	// SMODE2 = H for Master/Slave i2s
-		gpio_set_gpio_pin(AVR32_PIN_PX31);  // PCM enable
-		gpio_clr_gpio_pin(AVR32_PIN_PX30);  // Multibit disable
-		gpio_clr_gpio_pin(AVR32_PIN_PX33); // DSD disable
+		gpio_set_gpio_pin(AT1201_DFS0);		// L H -> 96khz   L L  -> 48khz
+		gpio_clr_gpio_pin(AT1201_DFS1);
+		gpio_clr_gpio_pin(AT1201_HPFE);		// enable HP filter
 
-		gpio_set_gpio_pin(AVR32_PIN_PX56); // test sig 1
-		gpio_set_gpio_pin(AVR32_PIN_PX57); // test sig 2
+		gpio_set_gpio_pin(AT1201_PCM_ENABLE);  // PCM enable
+		gpio_clr_gpio_pin(AT1201_MULTIBIT_ENABLE);  // Multibit disable
+		gpio_clr_gpio_pin(AT1201_DSD_ENABLE); // DSD disable
 
-		gpio_set_gpio_pin(AK5394_RSTN);		// start AK5394A
-		//counter = 0;
-		//while (gpio_get_pin_value(AK5394_CAL) && (counter < COUNTER_TIME_OUT)) counter++;
-		// wait till CAL goes low or time out
-		// if time out then change feature adc to none
-		//if (counter >= COUNTER_TIME_OUT) features[feature_adc_index] = feature_adc_none;
-	}
+		gpio_set_gpio_pin(AT1201_TEST_SIG1); // test sig 1
+		gpio_set_gpio_pin(AT1201_TEST_SIG2); // test sig 2
+
+		gpio_set_gpio_pin(AT1201_RSTN);		// start AT1201
+	}		
 
 	gpio_enable_pin_pull_up(GPIO_PTT_INPUT);
 

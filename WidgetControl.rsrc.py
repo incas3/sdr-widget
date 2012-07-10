@@ -89,7 +89,7 @@
     'name':'ComboBoxAdc', 
     'position':(12, 154), 
     'size':(100, -1), 
-    'items':[u'none', u'ak5394a'], 
+    'items':[u'none', u'AT1201a'], 
     'text':'ADC Type', 
     },
 

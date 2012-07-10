@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
 /*
- * hpsdr_taskAK5394A.h
+ * taskAT1201.h
  *
  *  Created on: Feb 16, 2010
  *  Refactored on: Feb 26, 2011
@@ -23,9 +23,29 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef HPSDR_TASKAK5394A_H_
-#define HPSDR_TASKAK5394A_H_
+#ifndef TASKAT1201_H_
+#define TASKAT1201_H_
 
-void hpsdr_AK5394A_task_init(void);
 
-#endif /* HPSDR_TASKAK5394A_H_ */
+#define PDCA_CHANNEL_SSC_RX	   0	// highest priority of 8 channels
+#define PDCA_CHANNEL_SSC_TX	   1
+#define AUDIO_BUFFER_SIZE	(48*2*8) // 48 khz, stereo, 8 ms worth
+#define SPK_BUFFER_SIZE 	(48*2*16)
+
+//extern const gpio_map_t SSC_GPIO_MAP;
+//extern const pdca_channel_options_t PDCA_OPTIONS;
+//extern const pdca_channel_options_t SPK_PDCA_OPTIONS;
+
+extern volatile U32 audio_buffer_0[AUDIO_BUFFER_SIZE];
+extern volatile U32 audio_buffer_1[AUDIO_BUFFER_SIZE];
+extern volatile U32 spk_buffer_0[SPK_BUFFER_SIZE];
+extern volatile U32 spk_buffer_1[SPK_BUFFER_SIZE];
+extern volatile avr32_ssc_t *ssc;
+extern volatile int audio_buffer_in;
+extern volatile int spk_buffer_out;
+
+void AT1201_pdca_disable(void);
+void AT1201_pdca_enable(void);
+void AT1201_task_init(Bool uac2);
+
+#endif /* TASKAT1201_H_ */

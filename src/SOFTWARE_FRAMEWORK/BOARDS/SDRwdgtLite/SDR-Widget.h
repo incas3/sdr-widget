@@ -32,7 +32,7 @@
 #define LCD_DISPLAY         1   // 20x4 Liquid Crystal Display (LCD)
 //#define SHAFT_ENCODER       1   // Shaft Encoder VFO function
 #define Si570               1   // Si570 VXO control funcs (needs I2C driver)
-#define AK5394              1   // 24-bit ADC
+#define AT1201              1   // 24-bit ADC
 #define AK4382A             0   // 24-bit DAC
 #define TMP100              1   // Temperature measurement device  (needs I2C driver)
 #define AD7991              1   //  (needs I2C driver)

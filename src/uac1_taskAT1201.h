@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
 /*
- * uac2_taskAK5394A.h
+ * uac1_taskAT1201.h
  *
  *  Created on: Feb 16, 2010
  *  Refactored on: Feb 26, 2011
@@ -23,9 +23,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef UAC2_TASKAK5394A_H_
-#define UAC2_TASKAK5394A_H_
+#ifndef UAC1_TASKAT1201_H_
+#define UAC1_TASKAT1201_H_
 
-void uac2_AK5394A_task_init(void);
+void uac1_AT1201_task_init(void);
 
-#endif /* UAC2_TASKAK5394A_H_ */
+#endif /* UAC1_TASKAT1201_H_ */
