@@ -177,6 +177,7 @@
 #include "image.h"
 #include "composite_widget.h"
 #include "Mobo_config.h"
+#include "git_ref.h"
 /*
  *  A few global variables.
  */
@@ -267,7 +268,9 @@ int i;
 
 	// Initialize interrupt controller
 	INTC_init_interrupts();
-
+	print_dbg("Firmware git revision:");
+	print_dbg(GIT_REF);
+	print_dbg("\n");
 	
 	// Initialize USB clock (on PLL1)
 	pm_configure_usb_clock();

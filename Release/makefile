@@ -75,10 +75,13 @@ MSG_ASSEMBLING = Assembling:
 MSG_CLEANING = Cleaning project:
 MSG_CREATING_LIBRARY = Creating library:
 
+GIT_REF = `git show-ref refs/heads/master | cut -d " " -f 1 | cut -c 31-40`
+
 # Add inputs and outputs from these tool invocations to the build variables 
 all: build
 
 build: elf hex sizebefore sizeafter
+	echo "#define GIT_REF \"$(GIT_REF)\"" > ../src/git_ref.h
 
 elf: $(TARGET).elf
 hex: $(TARGET).hex
