@@ -769,6 +769,7 @@ uint8_t dg8saqFunctionSetup(uint8_t type, uint16_t wValue, uint16_t wIndex, U8* 
 		case 0x71:
 			switch (wValue){
 			case 0:				// set frequency
+				print_dbg("Set frequency in dg8saq\n");
 				// I think this should just pass the sample rate in Hertz, 32 bits
 				switch (wIndex) {
 				case 0:
@@ -786,6 +787,12 @@ uint8_t dg8saqFunctionSetup(uint8_t type, uint16_t wValue, uint16_t wIndex, U8* 
 				case 2:
 					if (current_freq.frequency != 192000){
 						current_freq.frequency = 192000;
+						freq_changed = TRUE;
+					}
+					break;
+				case 3:
+					if (current_freq.frequency != 384000){
+						current_freq.frequency = 384000;
 						freq_changed = TRUE;
 					}
 					break;

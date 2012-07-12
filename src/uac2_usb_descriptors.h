@@ -100,6 +100,8 @@
 #define EP_SIZE_1_HS        EP_IN_LENGTH_1_HS
 #define EP_INTERVAL_1_FS	0x01			 // one packet per uframe, each uF 1ms, so only 48khz
 #define EP_INTERVAL_1_HS    0x02			 // One packet per 2 uframe, each uF 125us, so 192khz
+#define EP_INTERVAL_1_US    0x04			 // One packet per 4 uframe, each uF 75us, so 384khz
+
 
 
 // USB Endpoint 2 descriptor
@@ -149,7 +151,7 @@
 
 // Input Terminal descriptor
 #define INPUT_TERMINAL_ID				0x01
-#define INPUT_TERMINAL_TYPE				0x0201 	// Terminal is microphone
+#define INPUT_TERMINAL_TYPE				0x0206 	// Terminal is microphone
 #define INPUT_TERMINAL_ASSOCIATION		0x00   	// No association
 #define INPUT_TERMINAL_NB_CHANNELS		0x02   	// Two channels for input terminal
 #define INPUT_TERMINAL_CHANNEL_CONF		0x00000003 	// Two channels at front left and front right positions

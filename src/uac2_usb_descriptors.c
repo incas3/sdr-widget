@@ -581,7 +581,6 @@ const S_usb_user_configuration_descriptor uac2_usb_conf_desc_hs =
     ,  FORMAT_TYPE_1
     ,  FORMAT_SUBSLOT_SIZE_1
     ,  FORMAT_BIT_RESOLUTION_1
-
     }
  ,
     {   sizeof(S_usb_endpoint_audio_descriptor_2)
@@ -589,7 +588,7 @@ const S_usb_user_configuration_descriptor uac2_usb_conf_desc_hs =
     ,   ENDPOINT_NB_1
     ,   EP_ATTRIBUTES_1
     ,   Usb_format_mcu_to_usb_data(16, EP_SIZE_1_HS)
-    ,   EP_INTERVAL_1_HS
+    ,   EP_INTERVAL_1_FS
     }
  ,
     {  sizeof(S_usb_endpoint_audio_specific_2)

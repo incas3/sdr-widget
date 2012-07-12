@@ -206,7 +206,8 @@ void uac2_device_audio_task(void *pvParameters)
 		{
 				if (current_freq.frequency == 96000) num_samples = 24;
 				else if (current_freq.frequency == 48000) num_samples = 12;
-				else num_samples = 48;	// freq 192khz
+				else if (current_freq.frequency == 192000) num_samples = 48;
+				else num_samples = 96;	// freq 384khz
 
 				if (!FEATURE_ADC_NONE){
 					if (Is_usb_in_ready(EP_AUDIO_IN)) {	// Endpoint ready for data transfer?

@@ -248,7 +248,7 @@ int i;
 		gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
 		gpio_set_gpio_pin(AT1201_HPFE);  // High pass filter
 		gpio_set_gpio_pin(AT1201_LJUST);  // i2s left justify 
-		gpio_clr_gpio_pin(AT1201_PHANTOM);  //enable phantom power
+		gpio_set_gpio_pin(AT1201_PHANTOM);  //enable phantom power
 
 		gpio_set_gpio_pin(AT1201_DFS0);		// L H -> 96khz   L L  -> 48khz
 		gpio_clr_gpio_pin(AT1201_DFS1);

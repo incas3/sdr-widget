@@ -107,6 +107,7 @@ void uac2_AT1201_task(void *pvParameters) {
 					gpio_set_gpio_pin(AVR32_PIN_PX51);
 
 				if ( FEATURE_ADC_AT1201 ) {
+					gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
 					gpio_set_gpio_pin(AT1201_DFS0);		// L H  -> 96khz
 					gpio_clr_gpio_pin(AT1201_DFS1);
 				}
@@ -183,6 +184,7 @@ void uac2_AT1201_task(void *pvParameters) {
 					gpio_set_gpio_pin(AVR32_PIN_PX51);
 
 				if ( FEATURE_ADC_AT1201 ) {
+					gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
 					gpio_clr_gpio_pin(AT1201_DFS0);		// H L -> 192khz
 					gpio_set_gpio_pin(AT1201_DFS1);
 				}
@@ -197,6 +199,31 @@ void uac2_AT1201_task(void *pvParameters) {
 
 				FB_rate = 192 << 14;
 
+			} else if (current_freq.frequency == 384000) {
+				pdca_disable_interrupt_reload_counter_zero(PDCA_CHANNEL_SSC_RX);
+				pdca_disable(PDCA_CHANNEL_SSC_RX);
+
+				if (FEATURE_BOARD_USBI2S)
+					gpio_set_gpio_pin(AVR32_PIN_PX16); // BSB 20110301 MUX in 24.576MHz/2 for AB-1
+				else if (FEATURE_BOARD_USBDAC)
+					gpio_set_gpio_pin(AVR32_PIN_PX51);
+
+				if ( FEATURE_ADC_AT1201 ) {
+					gpio_clr_gpio_pin(AT1201_MDIV);  // MDIV
+					gpio_set_gpio_pin(AT1201_DFS0);		// H L -> 192khz
+					gpio_set_gpio_pin(AT1201_DFS1);
+				}
+
+				pm_gc_disable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
+				pm_gc_setup(&AVR32_PM, AVR32_PM_GCLK_GCLK1, // gc
+							0,                  // osc_or_pll: use Osc (if 0) or PLL (if 1)
+							1,                  // pll_osc: select Osc0/PLL0 or Osc1/PLL1
+							0,                  // diven - disabled
+							0);                 // GCLK1 = 12.288Mhz
+				//pm_gc_enable(&AVR32_PM, AVR32_PM_GCLK_GCLK1);
+
+				FB_rate = 384 << 14;
+
 			} else if (current_freq.frequency == 48000) {
 				// if there are two XO, PX16 sets the 48x
 				// gpio_set_gpio_pin(AVR32_PIN_PX16);
@@ -209,6 +236,7 @@ void uac2_AT1201_task(void *pvParameters) {
 					gpio_set_gpio_pin(AVR32_PIN_PX51);
 
 				if ( FEATURE_ADC_AT1201 ) {
+					gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
 					gpio_clr_gpio_pin(AT1201_DFS0);		// L H  -> 96khz L L  -> 48khz
 					gpio_clr_gpio_pin(AT1201_DFS1);
 				}
@@ -237,6 +265,7 @@ void uac2_AT1201_task(void *pvParameters) {
 					gpio_clr_gpio_pin(AVR32_PIN_PX51);
 
 				if ( FEATURE_ADC_AT1201 ) {
+					gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
 					gpio_clr_gpio_pin(AT1201_DFS0);		// L H  -> 96khz L L  -> 48khz
 					gpio_clr_gpio_pin(AT1201_DFS1);
 				}

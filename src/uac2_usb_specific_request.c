@@ -127,7 +127,7 @@ const U8 Speedx_1[26] = {
 0x80,0xbb,0x00,0x00,	//48k Res
 };
 
-const U8 Speedx_2[38] = {
+const U8 Speedx_2[50] = {
 0x04,0x00,				//number of sample rate triplets
 
 0x80,0xbb,0x00,0x00,	//48k Min
@@ -140,11 +140,11 @@ const U8 Speedx_2[38] = {
 
 0x00,0xee,0x02,0x00,	//192k Min
 0x00,0xee,0x02,0x00,	//192k Max
-0x00,0x00,0x00,0x00	// 0 Res
+0x00,0x00,0x00,0x00,	// 0 Res
 
-//0x00,0xdc,0x05,0x00,	//384k Min
-//0x00,0xdc,0x05,0x00,	//384k Max
-//0x00,0x00,0x00,0x00		// 0 Res
+0x00,0xdc,0x05,0x00,	//384k Min
+0x00,0xdc,0x05,0x00,	//384k Max
+0x00,0x00,0x00,0x00		// 0 Res
 };
 
 //_____ D E C L A R A T I O N S ____________________________________________
@@ -200,12 +200,17 @@ Bool uac2_user_read_request(U8 type, U8 request)
 
 	if (type == IN_CL_INTERFACE || type == OUT_CL_INTERFACE){    // process Class Specific Interface
 
-
+		/*print_dbg("CHange from host: ");
+			print_dbg_hex(type);
+			print_dbg("\n");
+			print_dbg_hex(wIndex);
+			print_dbg("\n");*/
 		//  request for AUDIO interfaces
 
 		if (wIndex == DSC_INTERFACE_AS){				// Audio Streaming Interface
+			//print_dbg("DSC_INTERFACE_AS\n");
 			if (type == IN_CL_INTERFACE){			// get controls
-
+				//print_dbg("type == IN_CL_INTERFACE\n");
 				if (wValue_msb == AUDIO_AS_VAL_ALT_SETTINGS && wValue_lsb == 0
 					&& request == AUDIO_CS_REQUEST_CUR){
 					Usb_ack_setup_received_free();
@@ -242,6 +247,7 @@ Bool uac2_user_read_request(U8 type, U8 request)
 				} else return FALSE;
 
 			} else if (type == OUT_CL_INTERFACE){		// set controls
+				//print_dbg("type == OUT_CL_INTERFACE\n");
 				if (wValue_msb == AUDIO_AS_ACT_ALT_SETTINGS
 					&& request == AUDIO_CS_REQUEST_CUR){
 					Usb_ack_setup_received_free();
@@ -258,8 +264,9 @@ Bool uac2_user_read_request(U8 type, U8 request)
 		} // end DSC_INTERFACE_AS
 
 		if (wIndex == DSC_INTERFACE_AS_OUT){				// Playback Audio Streaming Interface
+			//print_dbg("DSC_INTERFACE_AS_OUT\n");
 			if (type == IN_CL_INTERFACE){			// get controls
-
+				//print_dbg("type == IN_CL_INTERFACE\n");
 				if (wValue_msb == AUDIO_AS_VAL_ALT_SETTINGS && wValue_lsb == 0
 					&& request == AUDIO_CS_REQUEST_CUR){
 					Usb_ack_setup_received_free();
@@ -296,6 +303,7 @@ Bool uac2_user_read_request(U8 type, U8 request)
 				} else return FALSE;
 
 			} else if (type == OUT_CL_INTERFACE){		// set controls
+				//print_dbg("type == OUT_CL_INTERFACE\n");
 				if (wValue_msb == AUDIO_AS_ACT_ALT_SETTINGS
 					&& request == AUDIO_CS_REQUEST_CUR){
 					Usb_ack_setup_received_free();
@@ -313,8 +321,24 @@ Bool uac2_user_read_request(U8 type, U8 request)
 
 		if ( (wIndex % 256) == DSC_INTERFACE_AUDIO){// low byte wIndex is Interface number
 													// high byte is for EntityID
-
+			//print_dbg("DSC_INTERFACE_AUDIO\n");
 			if (type == IN_CL_INTERFACE){			// get controls
+				/*print_dbg("type == IN_CL_INTERFACE\n");
+				print_dbg_hex(request);
+				print_dbg("\n");
+				print_dbg("msb: ");
+				print_dbg_hex(wValue_msb);
+				print_dbg("\n");
+				print_dbg("lsb: ");
+				print_dbg_hex(wValue_lsb);
+				print_dbg("\n");
+				print_dbg("wLength: ");
+				print_dbg_hex(wLength);
+				print_dbg("\n");
+				print_dbg("FEATURE_DAC_ES9022: ");
+				print_dbg_hex(FEATURE_DAC_ES9022);
+				print_dbg("\n");*/
+				//printf("TEST");
 				switch (wIndex /256){
 				case CSD_ID_1:
 					if (wValue_msb == AUDIO_CS_CONTROL_SAM_FREQ && wValue_lsb == 0
@@ -356,7 +380,8 @@ Bool uac2_user_read_request(U8 type, U8 request)
 						for (i = 0; i < (wLength); i++){
 							if (FEATURE_DAC_ES9022)
 								Usb_write_endpoint_data(EP_CONTROL, 8, Speedx_1[i]);
-							else Usb_write_endpoint_data(EP_CONTROL, 8, Speedx_2[i]);
+							else 
+								Usb_write_endpoint_data(EP_CONTROL, 8, Speedx_2[i]);
 							}
 						Usb_ack_control_in_ready_send();
 
@@ -399,10 +424,13 @@ Bool uac2_user_read_request(U8 type, U8 request)
 						Usb_ack_setup_received_free();
 
 						Usb_reset_endpoint_fifo_access(EP_CONTROL);
-
+						/*print_dbg("WLength: ");
+						print_dbg_hex(wLength);
+						print_dbg("\n");*/
 						// give total # of bytes requested
 						for (i = 0; i < (wLength); i++)
 							Usb_write_endpoint_data(EP_CONTROL, 8, Speedx_2[i]);
+
 						//							  LED_Toggle(LED0);
 						Usb_ack_control_in_ready_send();
 
@@ -522,6 +550,8 @@ Bool uac2_user_read_request(U8 type, U8 request)
 					return FALSE;
 				} // end switch EntityID
 			} else if (type == OUT_CL_INTERFACE){		// set controls
+				//print_dbg("type == OUT_CL_INTERFACE\n");
+
 				switch (wIndex /256){
 				case CSD_ID_1:							// set CUR freq
 				case CSD_ID_2:
@@ -534,6 +564,9 @@ Bool uac2_user_read_request(U8 type, U8 request)
 						current_freq.freq_bytes[2]=Usb_read_endpoint_data(EP_CONTROL, 8);
 						current_freq.freq_bytes[1]=Usb_read_endpoint_data(EP_CONTROL, 8);
 						current_freq.freq_bytes[0]=Usb_read_endpoint_data(EP_CONTROL, 8);
+						print_dbg("Got freq: ");
+						print_dbg_hex(current_freq.frequency);
+						print_dbg("\n");
 						freq_changed = TRUE;
 						Usb_ack_control_out_received_free();
 						Usb_ack_control_in_ready_send();    //!< send a ZLP for STATUS phase
