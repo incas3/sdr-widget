@@ -6,6 +6,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "taskEXERCISE.h"
+#include "soundboard_toggles.h"
 
 static void vtaskEXERCISE( void * pcParameters ) {
 	portTickType xLastWakeTime;
@@ -14,6 +15,8 @@ static void vtaskEXERCISE( void * pcParameters ) {
 	  while (TRUE){
 
 		vTaskDelayUntil(&xLastWakeTime, configTSK_EXERCISE_PERIOD);
+
+       // check_feature_change();
 
     }
 }

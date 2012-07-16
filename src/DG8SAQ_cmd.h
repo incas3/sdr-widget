@@ -68,7 +68,7 @@ extern volatile bool FRQ_lcdupdate;				// Flag: Update LCD frequency printout
 // 0x68
 // 0x6e
 // 0x6f
-
+#define TOGGLE_PHANTOM_POWER				0x72
 #define DG8SAQ_SDR_CTL 0x71					//
 #define DG8SAQ_SDR_CTL_SET_SR 0x00			//
 

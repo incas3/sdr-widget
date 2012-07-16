@@ -36,6 +36,7 @@ const char usage[] = {
 #include <string.h>
 #include <libusb-1.0/libusb.h>
 #include "src/features.h"
+//#include "src/DG8SAQ_cmd.h"
 
 int verbose = 0;
 
@@ -464,6 +465,16 @@ int reset_widget() {
     return finish(0);
 }
 
+int set_phantom_power() {
+	setup();
+	int res = device_to_host(0x72, 22, 0, 8);
+	//if (res != 1) {
+		fprintf(stderr, "widget-control: device_to_host(WIDGET_RESET, 22, 0, 8) returned %s?\n", error_string(res));
+		exit(finish(1));
+	//}
+    //return finish(0);
+}
+
 int main(int argc, char *argv[]) {
 	int i;
 	for (i = 1; i < argc; i += 1) {
@@ -501,6 +512,9 @@ int main(int argc, char *argv[]) {
 		}
 		if (strcmp(argv[i], "-r") == 0) { // reboot widget
 			exit(reset_widget());
+		}
+		if (strcmp(argv[i], "-p") == 0) { // reboot widget
+			exit(set_phantom_power());
 		}
 	}
 	fprintf(stderr, usage);

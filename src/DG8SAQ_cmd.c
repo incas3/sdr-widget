@@ -1,4 +1,4 @@
-/* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
+ /* -*- mode: c++; tab-width: 4; c-basic-offset: 4 -*- */
 /*
  * DG8SAQ_cmd.c
  *
@@ -823,6 +823,14 @@ uint8_t dg8saqFunctionSetup(uint8_t type, uint16_t wValue, uint16_t wIndex, U8* 
 			}
 		default:
 			return 1; //break;
+		case 0x72:	// Toggle phantom power
+			print_dbg("Phantom toggle ");
+			print_dbg_hex(wValue);
+			print_dbg("\n");
+			switch (wValue){
+				default:
+				return 1;
+			}
 	}
 	return 1;
 }

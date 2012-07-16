@@ -28,6 +28,7 @@ C_SRCS += \
 ../src/hpsdr_usb_specific_request.c \
 ../src/image.c \
 ../src/rotary_encoder.c \
+../src/soundboard_toggles.c \
 ../src/taskAT1201.c \
 ../src/taskEXERCISE.c \
 ../src/taskLCD.c \
@@ -74,6 +75,7 @@ OBJS += \
 ./src/hpsdr_usb_specific_request.o \
 ./src/image.o \
 ./src/rotary_encoder.o \
+./src/soundboard_toggles.o \
 ./src/taskAT1201.o \
 ./src/taskEXERCISE.o \
 ./src/taskLCD.o \
@@ -121,6 +123,7 @@ C_DEPS += \
 ./src/hpsdr_usb_specific_request.d \
 ./src/image.d \
 ./src/rotary_encoder.d \
+./src/soundboard_toggles.d \
 ./src/taskAT1201.d \
 ./src/taskEXERCISE.d \
 ./src/taskLCD.d \

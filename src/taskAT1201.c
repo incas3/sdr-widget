@@ -191,9 +191,9 @@ void AT1201_task_init(const Bool uac1) {
 	if (uac1) {
 		ssc_i2s_init(ssc, 48000, 24, 32, SSC_I2S_MODE_STEREO_OUT_STEREO_IN, FPBA_HZ);
 	} else {
-		ssc_i2s_init(ssc, 96000, 24, 32, SSC_I2S_MODE_SLAVE_STEREO_IN, FPBA_HZ);
+		ssc_i2s_init(ssc, 96000, 24, 32,  SSC_I2S_MODE_STEREO_OUT_STEREO_IN, FPBA_HZ);
 	}
-
+	//SSC_I2S_MODE_SLAVE_STEREO_IN
 	// set up PDCA
 	// In order to avoid long slave handling during undefined length bursts (INCR), the Bus Matrix
 	// provides specific logic in order to re-arbitrate before the end of the INCR transfer.

@@ -140,6 +140,7 @@
 #define AOT_INDEX		0x09
 #define AIN_INDEX		0x0A
 #define AIA_INDEX		0x0B
+#define PHANTOM_INDEX    0x0C
 
 
 #define NB_CONFIGURATION      1
@@ -337,7 +338,23 @@
   Usb_unicode('l'),\
   Usb_unicode('t')\
 }
-
+#define USB_PHANTOM_LENGTH         13
+#define USB_PHANTOM \
+{\
+  Usb_unicode('P'),\
+  Usb_unicode('h'),\
+  Usb_unicode('a'),\
+  Usb_unicode('n'),\
+  Usb_unicode('t'),\
+  Usb_unicode('o'),\
+  Usb_unicode('m'),\
+  Usb_unicode(' '),\
+  Usb_unicode('p'),\
+  Usb_unicode('o'),\
+  Usb_unicode('w'),\
+  Usb_unicode('e'),\
+  Usb_unicode('r')\
+}
 //_____ U S B  Widget-Lite   D E S C R I P T O R _____________
 
 //! struct usb_WL
@@ -442,6 +459,27 @@ __attribute__((__packed__))
 #pragma pack()
 #endif
 S_usb_aia;
+
+//// PHANTOM
+
+//! struct usb_PHANTOM
+typedef
+#if (defined __ICCAVR32__)
+#pragma pack(1)
+#endif
+struct
+#if (defined __GNUC__)
+__attribute__((__packed__))
+#endif
+{
+  U8  bLength;                  //!< Size of this descriptor in U8s
+  U8  bDescriptorType;          //!< STRING descriptor type
+  U16 wstring[USB_PHANTOM_LENGTH];   //!< Unicode characters
+}
+#if (defined __ICCAVR32__)
+#pragma pack()
+#endif
+S_usb_phantom;
 
 // Stop test
 #define LANGUAGE_ID           0x0409
@@ -1243,6 +1281,24 @@ __attribute__((__packed__))
 
 //! USB Mixer Unit descriptor pp 4.7.2.6
 //! USB Selector Unit descriptor pp 4.7.2.7
+typedef
+#if (defined __ICCAVR32__)
+#pragma pack(1)
+#endif
+struct
+#if (defined __GNUC__)
+__attribute__((__packed__))
+#endif
+{
+  U8  bLength;              /* Size of this descriptor in bytes */
+  U8  bDescriptorType;      /* CS_INTERFACE descriptor type */
+  U8  bDescriptorSubType;   /* SELECTOR_UNIT subtype */
+  U8  bUnitID;              /* Constant uniquely identifying the Unit within the audio function. This value is used in all requests to address this Unit */
+  U8  bNrInPins;            /* Number of Input Pins of this Unit */
+  U8  baSourceID;           /* ID of the Unit or Terminal to which the first Input Pin of this Selector Unit is connected. */
+  U8 bmControls;           /* Paired Bitmap of controls */
+  U8  iSelector;            /* String descriptor of this Output Terminal */
+} S_usb_selector_unit_descriptor_1;
 
 
 //! USB Audio Feature Unit descriptor pp 4.7.2.8
@@ -1435,6 +1491,7 @@ extern const S_usb_ait usb_user_ait;
 extern const S_usb_aot usb_user_aot;
 extern const S_usb_ain usb_user_ain;
 extern const S_usb_aia usb_user_aia;
+extern const S_usb_phantom usb_user_phantom;
 
 #define USB_HID_REPORT_DESC 47
 extern const U8 usb_hid_report_descriptor[USB_HID_REPORT_DESC];

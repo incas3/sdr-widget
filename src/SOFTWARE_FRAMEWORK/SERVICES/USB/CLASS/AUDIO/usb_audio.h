@@ -81,6 +81,7 @@
 #define FORMAT_SUB_TYPE                 0x02
 #define HEADER_SUB_TYPE                 0x01
 #define MIXER_UNIT_SUB_TYPE             0x04
+#define SELECTOR_UNIT_SUB_TYPE          0x05
 #define FEATURE_UNIT_SUB_TYPE           0x06
 #define INPUT_TERMINAL_SUB_TYPE         0x02
 #define OUTPUT_TERMINAL_SUB_TYPE        0x03

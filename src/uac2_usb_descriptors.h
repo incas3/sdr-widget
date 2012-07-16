@@ -91,6 +91,12 @@
 #define DSC_INTERFACE_AUDIO			INTERFACE_NB1
 
 
+
+ /// PHANTOM POWER
+
+ #define PHANTOM_UNIT_ID				0x22	// Phoantom power unit id
+
+
 // USB Endpoint 1 descriptor
 #define ENDPOINT_NB_1       ( UAC2_EP_AUDIO_IN | MSK_EP_DIR )
 #define EP_ATTRIBUTES_1		0b00100101         // ISOCHROUNOUS ASYNCHRONOUS IMPLICIT FEEDBACK
@@ -169,7 +175,7 @@
 //MIC Feature Unit descriptor
 #define MIC_FEATURE_UNIT_ID            0x02
 #define MIC_FEATURE_UNIT_SOURCE_ID     INPUT_TERMINAL_ID
-#define MIC_BMA_CONTROLS               0x00000003 	// Mute readable and writable
+#define MIC_BMA_CONTROLS               0x0000FFFF 	// Mute readable and writable
 #define MIC_BMA_CONTROLS_CH_1		   0x00000003	//
 #define MIC_BMA_CONTROLS_CH_2		   0x00000003
 
@@ -184,9 +190,9 @@
 //SPK Feature Unit descriptor
 #define SPK_FEATURE_UNIT_ID            0x12
 #define SPK_FEATURE_UNIT_SOURCE_ID     SPK_INPUT_TERMINAL_ID
-#define SPK_BMA_CONTROLS               0x00000003 	// Mute readable and writable
-#define SPK_BMA_CONTROLS_CH_1		   0x00000003	//
-#define SPK_BMA_CONTROLS_CH_2		   0x00000003
+#define SPK_BMA_CONTROLS               0x00000000 	// Mute readable and writable
+#define SPK_BMA_CONTROLS_CH_1		   0x00000000	//
+#define SPK_BMA_CONTROLS_CH_2		   0x00000000
 
 // SPK Output Terminal descriptor
 #define SPK_OUTPUT_TERMINAL_ID				0x13
@@ -278,6 +284,7 @@ __attribute__((__packed__))
 	S_usb_feature_unit_descriptor_2			mic_fea_unit;
 	S_usb_out_ter_descriptor_2				mic_out_ter;
 	S_usb_in_ter_descriptor_2				spk_in_ter;
+	//S_usb_selector_unit_descriptor_1		select_unit;
 	S_usb_feature_unit_descriptor_2			spk_fea_unit;
 	S_usb_out_ter_descriptor_2				spk_out_ter;
 	S_usb_as_interface_descriptor	 		mic_as_alt0;

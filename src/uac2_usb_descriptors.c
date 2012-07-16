@@ -219,7 +219,20 @@ const S_usb_user_configuration_descriptor uac2_usb_conf_desc_fs =
   ,  Usb_format_mcu_to_usb_data(16, INPUT_TERMINAL_CONTROLS)
   ,  INPUT_TERMINAL_STRING_DESC
   }
+  ,
+  /*********** PHANTOM POWER *****************
+
+  {  sizeof(S_usb_selector_unit_descriptor_1)
+  ,  CS_INTERFACE
+  ,  SELECTOR_UNIT_SUB_TYPE
+  ,  PHANTOM_UNIT_ID
+  ,  0x01
+  ,  0x01
+  ,  0x01
+  ,  PHANTOM_INDEX
+  }
 ,
+  /*******************************************/
   {  sizeof(S_usb_feature_unit_descriptor_2)
   ,  CS_INTERFACE
   ,  FEATURE_UNIT_SUB_TYPE
@@ -519,6 +532,19 @@ const S_usb_user_configuration_descriptor uac2_usb_conf_desc_hs =
   ,  INPUT_TERMINAL_STRING_DESC
   }
 ,
+  /*********** PHANTOM POWER *****************
+
+  {  sizeof(S_usb_selector_unit_descriptor_1)
+  ,  CS_INTERFACE
+  ,  SELECTOR_UNIT_SUB_TYPE
+  ,  PHANTOM_UNIT_ID
+  ,  0x01
+  ,  0x01
+  ,  0x01
+  ,  PHANTOM_INDEX
+  }
+,
+  /*******************************************/
   {  sizeof(S_usb_feature_unit_descriptor_2)
   ,  CS_INTERFACE
   ,  FEATURE_UNIT_SUB_TYPE

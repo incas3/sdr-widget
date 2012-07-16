@@ -32,6 +32,8 @@ typedef enum {
   feature_dac_index,			// dac identifier
   feature_lcd_index,			// lcd display type
   feature_log_index,			// startup log display timing
+  feature_phantom_index,			// phantom power settings
+  feature_test_signal_index,			// phantom power settings
   feature_end_index				// end marker, used to size arrays
 } feature_index_t;
 
@@ -45,6 +47,8 @@ typedef enum {
 		"dac",										\
 		"lcd",										\
 		"log",										\
+		"phantom_power",							\
+		"test_signal",								\
 		"end"
 
 //
@@ -102,6 +106,14 @@ typedef enum {
 	feature_log_1sec,
 	feature_log_2sec,
 	feature_end_log,
+	feature_phantom_on,
+	feature_phantom_off,
+	feature_end_phantom,
+	feature_test_signal_ch1,
+	feature_test_signal_ch2,
+	feature_test_signal_both,
+	feature_test_signal_off,
+	feature_end_test_signal,
 	feature_end_values			// end
 } feature_values_t;
 
@@ -142,6 +154,14 @@ typedef enum {
 		"500ms",														\
 		"1sec",															\
 		"2sec",															\
+		"end",															\
+		"phantom_on",													\
+		"phantom_off",													\
+		"end",															\
+		"test_signal_ch1",												\
+		"test_signal_ch2",												\
+		"test_signal_both",										\
+		"test_signal_off",												\
 		"end",															\
 		"end"
 	
@@ -200,6 +220,13 @@ extern const features_t features_default;
 #define FEATURE_LOG_1SEC				(features[feature_log_index] == (uint8_t)feature_log_1sec)
 #define FEATURE_LOG_2SEC				(features[feature_log_index] == (uint8_t)feature_log_2sec)
 
+#define FEATURE_PHANTOM_ON				(features[feature_phantom_index] == (uint8_t)feature_phantom_on)
+#define FEATURE_PHANTOM_OFF				(features[feature_phantom_index] == (uint8_t)feature_phantom_off)
+
+#define FEATURE_TEST_SIGNAL_CH1			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_ch1)
+#define FEATURE_TEST_SIGNAL_CH2			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_ch2)
+#define FEATURE_TEST_SIGNAL_BOTH			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_both)
+#define FEATURE_TEST_SIGNAL_OFF			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_off)
 //
 // the version in the features specifies
 // the number of feature indexes and the number of feature values
@@ -246,6 +273,13 @@ extern const features_t features_default;
 #define FEATURE_LOG_DEFAULT				feature_log_500ms
 #endif
 
+#ifndef FEATURE_PHANTOM_DEFAULT
+#define FEATURE_PHANTOM_DEFAULT				feature_phantom_off
+#endif
+#ifndef FEATURE_TEST_SIGNAL_DEFAULT
+#define FEATURE_TEST_SIGNAL_DEFAULT				feature_test_signal_off
+#endif
+
 #define FEATURES_DEFAULT FEATURE_MAJOR_DEFAULT,		\
 		FEATURE_MINOR_DEFAULT,						\
 		FEATURE_BOARD_DEFAULT,						\
@@ -255,7 +289,9 @@ extern const features_t features_default;
 		FEATURE_ADC_DEFAULT,						\
 		FEATURE_DAC_DEFAULT,						\
 		FEATURE_LCD_DEFAULT,						\
-		FEATURE_LOG_DEFAULT
+		FEATURE_LOG_DEFAULT,						\
+		FEATURE_PHANTOM_DEFAULT,						\
+		FEATURE_TEST_SIGNAL_DEFAULT
 
 extern const char * const feature_value_names[];
 extern const char * const feature_index_names[];

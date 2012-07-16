@@ -14,6 +14,8 @@
 
 #include "features.h"
 #include "widget.h"
+ #include "print_funcs.h"
+ #include "soundboard_toggles.h"
 
 // Set up NVRAM (EEPROM) storage
 #if defined (__GNUC__)
@@ -81,6 +83,7 @@ void features_display_all() {
 }
 
 uint8_t feature_set(uint8_t index, uint8_t value) {
+	
 	return index > feature_minor_index && index < feature_end_index && value < feature_end_values ?
 		features[index] = value :
 		0xFF;
@@ -91,7 +94,13 @@ uint8_t feature_get(uint8_t index) {
 }
 
 uint8_t feature_set_nvram(uint8_t index, uint8_t value)  {
+	//feature_changed();
+	if( index > feature_minor_index && index < feature_end_index && value < feature_end_values && index > feature_lcd_index ) {
+		features[index] = value;
+		feature_changed(index,value);
+	}
 	if ( index > feature_minor_index && index < feature_end_index && value < feature_end_values ) {
+
 		flashc_memset8((void *)&features_nvram[index], value, sizeof(uint8_t), TRUE);
 		return features_nvram[index];
 	} else

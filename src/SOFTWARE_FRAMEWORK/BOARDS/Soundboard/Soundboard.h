@@ -46,7 +46,7 @@
 
 // Osc1 crystal is not mounted by default. Set the following definitions to the
 // appropriate values if a custom Osc1 crystal is mounted on your board.
-#define FOSC1           24576000  // 12288000                              //!< Osc1 frequency: Hz.
+#define FOSC1           12288000  //24576000                                //!< Osc1 frequency: Hz.
 #define OSC1_STARTUP    AVR32_PM_OSCCTRL1_STARTUP_2048_RCOSC  //!< Osc1 startup time: RCOsc periods.
 
 //! @}

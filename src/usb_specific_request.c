@@ -233,6 +233,10 @@ Bool usb_user_get_descriptor(U8 type, U8 string)
        pbuffer = &usb_user_aia;
        break;
 
+    case PHANTOM_INDEX:
+      //data_to_transfer = sizeof(usb_user_phantom);
+      // pbuffer = &usb_user_phantom;
+    break;
 
     default:
       break;
