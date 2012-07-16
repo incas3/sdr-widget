@@ -307,8 +307,8 @@ extern const features_t features_default;
 		FEATURE_LCD_DEFAULT,						\
 		FEATURE_LOG_DEFAULT,						\
 		FEATURE_PHANTOM_DEFAULT,					\
-		FEATURE_HIGH_PASS_DEFAULT,					\
-		FEATURE_TEST_SIGNAL_DEFAULT
+		FEATURE_TEST_SIGNAL_DEFAULT,				\
+		FEATURE_HIGH_PASS_DEFAULT
 
 extern const char * const feature_value_names[];
 extern const char * const feature_index_names[];
