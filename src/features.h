@@ -32,8 +32,9 @@ typedef enum {
   feature_dac_index,			// dac identifier
   feature_lcd_index,			// lcd display type
   feature_log_index,			// startup log display timing
-  feature_phantom_index,			// phantom power settings
-  feature_test_signal_index,			// phantom power settings
+  feature_phantom_index,		// phantom power settings
+  feature_test_signal_index,	// test signal settings
+  feature_high_pass_index,		// low pass filter settings
   feature_end_index				// end marker, used to size arrays
 } feature_index_t;
 
@@ -49,6 +50,7 @@ typedef enum {
 		"log",										\
 		"phantom_power",							\
 		"test_signal",								\
+		"high_pass_filter",							\
 		"end"
 
 //
@@ -114,6 +116,9 @@ typedef enum {
 	feature_test_signal_both,
 	feature_test_signal_off,
 	feature_end_test_signal,
+	feature_high_pass_on,
+	feature_high_pass_off,
+	feature_end_high_pass,
 	feature_end_values			// end
 } feature_values_t;
 
@@ -160,8 +165,11 @@ typedef enum {
 		"end",															\
 		"test_signal_ch1",												\
 		"test_signal_ch2",												\
-		"test_signal_both",										\
+		"test_signal_both",												\
 		"test_signal_off",												\
+		"end",															\
+		"high_pass_on",													\
+		"high_pass_off",													\
 		"end",															\
 		"end"
 	
@@ -225,8 +233,12 @@ extern const features_t features_default;
 
 #define FEATURE_TEST_SIGNAL_CH1			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_ch1)
 #define FEATURE_TEST_SIGNAL_CH2			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_ch2)
-#define FEATURE_TEST_SIGNAL_BOTH			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_both)
+#define FEATURE_TEST_SIGNAL_BOTH		(features[feature_test_signal_index] == (uint8_t)feature_test_signal_both)
 #define FEATURE_TEST_SIGNAL_OFF			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_off)
+
+#define FEATURE_HIGH_PASS_ON				(features[feature_high_pass_index] == (uint8_t)feature_high_pass_on)
+#define FEATURE_HIGH_PASS_OFF			(features[feature_high_pass_index] == (uint8_t)feature_high_pass_off)
+
 //
 // the version in the features specifies
 // the number of feature indexes and the number of feature values
@@ -280,6 +292,10 @@ extern const features_t features_default;
 #define FEATURE_TEST_SIGNAL_DEFAULT				feature_test_signal_off
 #endif
 
+#ifndef FEATURE_HIGH_PASS_DEFAULT
+#define FEATURE_HIGH_PASS_DEFAULT				feature_high_pass_on
+#endif
+
 #define FEATURES_DEFAULT FEATURE_MAJOR_DEFAULT,		\
 		FEATURE_MINOR_DEFAULT,						\
 		FEATURE_BOARD_DEFAULT,						\
@@ -290,7 +306,8 @@ extern const features_t features_default;
 		FEATURE_DAC_DEFAULT,						\
 		FEATURE_LCD_DEFAULT,						\
 		FEATURE_LOG_DEFAULT,						\
-		FEATURE_PHANTOM_DEFAULT,						\
+		FEATURE_PHANTOM_DEFAULT,					\
+		FEATURE_HIGH_PASS_DEFAULT,					\
 		FEATURE_TEST_SIGNAL_DEFAULT
 
 extern const char * const feature_value_names[];
