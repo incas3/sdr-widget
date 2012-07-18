@@ -257,9 +257,9 @@ extern const features_t features_default;
 #endif
 #ifndef FEATURE_IMAGE_DEFAULT
 #if FEATURE_BOARD_DEFAULT == feature_board_widget
-#define FEATURE_IMAGE_DEFAULT			feature_image_uac1_dg8saq
+#define FEATURE_IMAGE_DEFAULT			feature_image_uac2_audio
 #else
-#define FEATURE_IMAGE_DEFAULT			feature_image_uac1_audio
+#define FEATURE_IMAGE_DEFAULT			feature_image_uac2_audio
 #endif
 #endif
 #ifndef FEATURE_IN_DEFAULT
@@ -279,7 +279,7 @@ extern const features_t features_default;
 #define FEATURE_DAC_DEFAULT				feature_dac_cs4344
 #endif
 #ifndef FEATURE_LCD_DEFAULT
-#define FEATURE_LCD_DEFAULT				feature_lcd_hd44780
+#define FEATURE_LCD_DEFAULT				feature_lcd_none
 #endif
 #ifndef FEATURE_LOG_DEFAULT
 #define FEATURE_LOG_DEFAULT				feature_log_500ms

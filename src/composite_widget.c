@@ -258,7 +258,11 @@ int i;
 		gpio_clr_gpio_pin(AT1201_MULTIBIT_ENABLE);  // Multibit disable
 		gpio_clr_gpio_pin(AT1201_DSD_ENABLE); // DSD disable
 
-
+		// Read features
+		for(i=feature_lcd_index;i<feature_end_index;i++) {
+			//features[index] = value;
+			feature_changed(i,features[i]);
+		}
 
 		gpio_set_gpio_pin(AT1201_RSTN);		// start AT1201
 	}		
