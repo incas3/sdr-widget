@@ -246,13 +246,13 @@ int i;
 		// Set up AT1201
 		gpio_set_gpio_pin(AT1201_MASTER); // ADC master_mode
 		gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
-		gpio_set_gpio_pin(AT1201_HPFE);  // High pass filter
+		//gpio_set_gpio_pin(AT1201_HPFE);  // High pass filter
 		gpio_set_gpio_pin(AT1201_LJUST);  // i2s left justify 
 		
 
 		gpio_set_gpio_pin(AT1201_DFS0);		// L H -> 96khz   L L  -> 48khz
 		gpio_clr_gpio_pin(AT1201_DFS1);
-		gpio_clr_gpio_pin(AT1201_HPFE);		// enable HP filter
+		//gpio_clr_gpio_pin(AT1201_HPFE);		// enable HP filter
 
 		gpio_set_gpio_pin(AT1201_PCM_ENABLE);  // PCM enable
 		gpio_clr_gpio_pin(AT1201_MULTIBIT_ENABLE);  // Multibit disable

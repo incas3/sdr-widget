@@ -20,6 +20,19 @@ void feature_changed(uint8_t index,uint8_t feature) {
 				break;
 			}
 		break;
+		case feature_high_pass_index:
+			switch (feature) {
+				case feature_high_pass_on:
+					gpio_set_gpio_pin(AT1201_HPFE); 
+					print_dbg("Feature changed to high pass on\n");
+				break;
+
+				case feature_high_pass_off:
+					gpio_clr_gpio_pin(AT1201_HPFE); 
+					print_dbg("Feature changed to high pass off\n");
+				break;
+			}
+		break;
 		case feature_test_signal_index:
 			switch (feature) {
 				case feature_test_signal_ch1:
