@@ -93,9 +93,9 @@ void uac2_AT1201_task(void *pvParameters) {
 		vTaskDelayUntil(&xLastWakeTime, UAC2_configTSK_AT1201_PERIOD);
 		//print_dbg(".\n");
 		if (freq_changed) {
-			print_dbg("Frequency changed to ");
+			/*print_dbg("Frequency changed to ");
 			print_dbg_ulong(current_freq.frequency);
-			print_dbg("\n");
+			print_dbg("\n");*/
 			spk_mute = TRUE;						// mute speaker while changing frequency and oscillator
 			if (current_freq.frequency == 96000) {
 				pdca_disable_interrupt_reload_counter_zero(PDCA_CHANNEL_SSC_RX);

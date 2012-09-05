@@ -28,16 +28,16 @@
 
 /*! \name Peripherals to include at compile time. */
 //! @{
-#define I2C                 1	// I2C driver
-#define LCD_DISPLAY         1   // 20x4 Liquid Crystal Display (LCD)
+#define I2C                 0	// I2C driver
+#define LCD_DISPLAY         0   // 20x4 Liquid Crystal Display (LCD)
 //#define SHAFT_ENCODER       1   // Shaft Encoder VFO function
-#define Si570               1   // Si570 VXO control funcs (needs I2C driver)
+#define Si570               0   // Si570 VXO control funcs (needs I2C driver)
 #define AT1201              1   // 24-bit ADC
 #define AK4382A             0   // 24-bit DAC
-#define TMP100              1   // Temperature measurement device  (needs I2C driver)
-#define AD7991              1   //  (needs I2C driver)
-#define AD5301              1   //  (needs I2C driver)
-#define PCF8574             1   // port expander control of TX/RX and Band Pass filters  (needs I2C driver)
+#define TMP100              0   // Temperature measurement device  (needs I2C driver)
+#define AD7991              0   //  (needs I2C driver)
+#define AD5301              0   //  (needs I2C driver)
+#define PCF8574             0   // port expander control of TX/RX and Band Pass filters  (needs I2C driver)
 
 #define DEBUG232            1   // Use the UART debug port
 #define USB                 1   // Although it may look odd there may be a free standing mode.
@@ -50,15 +50,15 @@
 
 /*! \name Features to include at compile time. */
 //! @{
-#define MOBO_FUNCTIONS		1	// AD7991/AD5301/TMP100, P/SWR etc...  (needs I2C driver)
+#define MOBO_FUNCTIONS		0	// AD7991/AD5301/TMP100, P/SWR etc...  (needs I2C driver)
 								// Without this, we have a simple Si570 control
 // None, or only one of the two, CALC_FREQ_MUL_ADD or CALC_BAND_MUL_ADD should be selected
-#define CALC_FREQ_MUL_ADD	0	// Frequency Subtract and Multiply Routines (for smart VFO)
+#define CALC_FREQ_MUL_ADD	1	// Frequency Subtract and Multiply Routines (for smart VFO)
 								// normally not needed with Mobo 4.3.   *OR*
-#define CALC_BAND_MUL_ADD	1	// Band dependent Frequency Subtract and Multiply Routines
+#define CALC_BAND_MUL_ADD	0	// Band dependent Frequency Subtract and Multiply Routines
 								// (for smart VFO) normally not needed with Mobo 4.3.
 
-#define BPF_LPF_Module		1	// Band Pass and Low Pass filter switcing
+#define BPF_LPF_Module		0	// Band Pass and Low Pass filter switcing
 
 #define SCRAMBLED_FILTERS	1	// Enable a non contiguous order of filters
 
@@ -74,17 +74,17 @@
 #define FLTR_CGH_DURING_TX	0	// Allow Filter changes when frequency is changed during TX
 
 // Transmit specific features --------------------------------------------------------------
-#define POWER_SWR           1   // Measure, and if LCD, display Power and SWR.
+#define POWER_SWR           0   // Measure, and if LCD, display Power and SWR.
                                 // If not defined, while LCD is defined, then
                                 // LCD displays Vdd and I-Pa
-#define SWR_ALARM_FUNC      1   // SWR alarm function, activates a secondary PTT
+#define SWR_ALARM_FUNC      0   // SWR alarm function, activates a secondary PTT
                                 // with auto Hi-SWR shutdown. Is dependent
                                 // on POWER_SWR being defined as well
 #define REVERSE_PTT2_LOGIC	0	// Reverse the logic of the PTT2 signal pin
 
-#define	FAN_CONTROL			1	// Turn PA Cooling FAN On/Off, based on temperature
+#define	FAN_CONTROL			0	// Turn PA Cooling FAN On/Off, based on temperature
 // Only one of the two below is selected with the FAN Control
-#define	BUILTIN_PCF_FAN		1	// This alternative uses a pin on the builtin PCF8574
+#define	BUILTIN_PCF_FAN		0	// This alternative uses a pin on the builtin PCF8574
 								// pin is definable by Cmd 64 index 3, normally header P1, pin 5
 #define	EXTERN_PCF_FAN		0	// This alternative uses a pin on an external PCF8574
 								// pin is definable by Cmd 64 index 3

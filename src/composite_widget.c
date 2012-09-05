@@ -178,6 +178,7 @@
 #include "composite_widget.h"
 #include "Mobo_config.h"
 #include "git_ref.h"
+#include "soundboard_toggles.h"
 /*
  *  A few global variables.
  */
@@ -244,9 +245,8 @@ int i;
 
 	if (FEATURE_ADC_AT1201){
 		// Set up AT1201
-		gpio_set_gpio_pin(AT1201_MASTER); // ADC master_mode
+		gpio_clr_gpio_pin(AT1201_MASTER); // ADC master_mode
 		gpio_set_gpio_pin(AT1201_MDIV);  // MDIV
-		//gpio_set_gpio_pin(AT1201_HPFE);  // High pass filter
 		gpio_set_gpio_pin(AT1201_LJUST);  // i2s left justify 
 		
 
@@ -257,7 +257,9 @@ int i;
 		gpio_set_gpio_pin(AT1201_PCM_ENABLE);  // PCM enable
 		gpio_clr_gpio_pin(AT1201_MULTIBIT_ENABLE);  // Multibit disable
 		gpio_clr_gpio_pin(AT1201_DSD_ENABLE); // DSD disable
-
+		
+		for (i=0; i< 1000; i++) gpio_clr_gpio_pin(AT1201_HPFE); // Calibration cycle
+		gpio_set_gpio_pin(AT1201_HPFE); 			// Disable high pass filter it will be enabled later
 		// Read features
 		for(i=feature_lcd_index;i<feature_end_index;i++) {
 			//features[index] = value;
