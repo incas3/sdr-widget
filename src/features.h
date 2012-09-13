@@ -118,6 +118,7 @@ typedef enum {
 	feature_end_test_signal,
 	feature_high_pass_on,
 	feature_high_pass_off,
+	feature_high_pass_auto,
 	feature_end_high_pass,
 	feature_end_values			// end
 } feature_values_t;
@@ -169,7 +170,8 @@ typedef enum {
 		"test_signal_off",												\
 		"end",															\
 		"high_pass_on",													\
-		"high_pass_off",													\
+		"high_pass_off",												\
+		"high_pass_auto",												\
 		"end",															\
 		"end"
 	
@@ -236,8 +238,9 @@ extern const features_t features_default;
 #define FEATURE_TEST_SIGNAL_BOTH		(features[feature_test_signal_index] == (uint8_t)feature_test_signal_both)
 #define FEATURE_TEST_SIGNAL_OFF			(features[feature_test_signal_index] == (uint8_t)feature_test_signal_off)
 
-#define FEATURE_HIGH_PASS_ON				(features[feature_high_pass_index] == (uint8_t)feature_high_pass_on)
+#define FEATURE_HIGH_PASS_ON			(features[feature_high_pass_index] == (uint8_t)feature_high_pass_on)
 #define FEATURE_HIGH_PASS_OFF			(features[feature_high_pass_index] == (uint8_t)feature_high_pass_off)
+#define FEATURE_HIGH_PASS_AUTO			(features[feature_high_pass_index] == (uint8_t)feature_high_pass_auto)
 
 //
 // the version in the features specifies

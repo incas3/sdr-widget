@@ -180,13 +180,13 @@ void AT1201_task_init(const Bool uac1) {
 
 	// Assign GPIO to SSC.
 	gpio_enable_module(SSC_GPIO_MAP, sizeof(SSC_GPIO_MAP) / sizeof(SSC_GPIO_MAP[0]));
-	gpio_enable_pin_glitch_filter(SSC_RX_CLOCK);
+	/*gpio_enable_pin_glitch_filter(SSC_RX_CLOCK);
 	gpio_enable_pin_glitch_filter(SSC_RX_DATA);
 	gpio_enable_pin_glitch_filter(SSC_RX_FRAME_SYNC);
 	gpio_enable_pin_glitch_filter(SSC_TX_CLOCK);
 	gpio_enable_pin_glitch_filter(SSC_TX_DATA);
 	gpio_enable_pin_glitch_filter(SSC_TX_FRAME_SYNC);
-
+	*/
 	// set up SSC
 	if (uac1) {
 		ssc_i2s_init(ssc, 48000, 24, 32, SSC_I2S_MODE_STEREO_OUT_STEREO_IN, FPBA_HZ);
